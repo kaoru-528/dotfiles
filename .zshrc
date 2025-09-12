@@ -118,6 +118,8 @@ export PGDATA=/usr/local/var/postgres
 export DISABLE_SPRING=true
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export PATH="$(brew --prefix python)/libexec/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/libomp/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libomp/include"
 
 # History設定
 HISTFILE=~/.zsh_history
@@ -149,18 +151,6 @@ if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]
     zstyle ':chpwd:*' recent-dirs-max 1000
 fi
 
-# fzf cdr
-function fzf-cdr() {
-    local selected_dir=$(cdr -l | awk '{ print $2 }' | fzf --reverse)
-    if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
-        zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N fzf-cdr
-setopt noflowcontrol
-bindkey '^q' fzf-cdr
 
 
 # git stashしたリストの中から選択し、applyする関数
@@ -180,3 +170,22 @@ function git_stash_list_apply() {
     # stash apply を実行
     git stash apply "$stash_name"
 }
+
+function gadd() {
+  local out q n addfiles
+  while out=$(
+      git status --short |
+      awk '{if (substr($0,2,1) !~ / /) print $2}' |
+      fzf-tmux --multi --exit-0 --expect=ctrl-d); do
+    q=$(head -1 <<< "$out")
+    n=$[$(wc -l <<< "$out") - 1]
+    addfiles=(`echo $(tail "-$n" <<< "$out")`)
+    [[ -z "$addfiles" ]] && continue
+    if [ "$q" = ctrl-d ]; then
+      git diff --color=always $addfiles | less -R
+    else
+      git add $addfiles
+    fi
+  done
+  }
+

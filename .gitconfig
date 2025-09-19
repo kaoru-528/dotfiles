@@ -36,8 +36,8 @@
     syntax-theme = OneHalfDark
     whitespace-error-style = "#80002a" reverse
     zero-style = syntax
-   blame-format = "{author:<18} ({commit:>7}) ┊{timestamp:^16}┊ "
-   side-by-side = true
+    blame-format = "{author:<18} ({commit:>7}) ┊{timestamp:^16}┊ "
+    side-by-side = true
 [push]
 	default = current
 [include]

@@ -60,7 +60,7 @@ ZSH_THEME="agnoster"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+ HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -71,13 +71,13 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	z
-        fzf
-	git
-	zsh-syntax-highlighting
-  	zsh-completions
-  	zsh-autosuggestions
-  	zsh-history-substring-search
+  z
+  fzf
+  git
+  zsh-syntax-highlighting
+  zsh-completions
+  zsh-autosuggestions
+  zsh-history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh

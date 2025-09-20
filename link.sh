@@ -14,11 +14,14 @@ link_to_homedir() {
   fi
 
   local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-  local dotdir=$(dirname ${script_dir})
-  if [[ "$HOME" != "$dotdir" ]];then
+  local dotdir="$(cd "$(dirname \"$(dirname \"${BASH_SOURCE[0]}\")\")" && pwd -P)"
+  if [[ "$HOME/" != "$dotdir"* ]];then
     for f in $dotdir/.??*; do
         [[ `basename $f` == ".git" ]] && continue
         [[ `basename $f` == ".gitignore" ]] && continue
+        [[ `basename $f` == ".DS_Store" ]] && continue
+        [[ `basename $f` == "link.sh" ]] && continue
+        [[ `basename $f` == "git-scripts" ]] && continue
       if [[ -L "$HOME/`basename $f`" ]];then
         command rm -f "$HOME/`basename $f`"
       fi
@@ -27,6 +30,9 @@ link_to_homedir() {
       fi
       command ln -snf $f $HOME
     done
+    if [[ -e "$dotdir/git-scripts" ]]; then
+      command ln -snf "$dotdir/git-scripts" "$HOME/git-scripts"
+    fi
   else
     command echo "same install src dest"
   fi

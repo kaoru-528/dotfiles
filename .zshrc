@@ -110,6 +110,7 @@ source $ZSH/oh-my-zsh.sh
 alias ll="ls -all"
 alias gs="git switch"
 alias gp="git pull origin main"
+export PATH="$HOME/git-scripts:$PATH"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
@@ -150,42 +151,3 @@ if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]
     zstyle ':chpwd:*' recent-dirs-default true
     zstyle ':chpwd:*' recent-dirs-max 1000
 fi
-
-
-
-# git stashしたリストの中から選択し、applyする関数
-function git_stash_list_apply() {
-    # stash list を取得して選択
-    local selected_stash=$(git stash list | fzf --height=15 --prompt="Select a stash to apply: ")
-
-    # 選択されなかった場合は終了
-    if [[ -z "$selected_stash" ]]; then
-        echo "No stash selected. Aborting."
-        return 1
-    fi
-
-    # 選択された stash 名を抽出 (例: 'stash@{0}')
-    local stash_name=$(echo "$selected_stash" | sed -E 's/^(stash@\{[0-9]+\}):.*/\1/')
-
-    # stash apply を実行
-    git stash apply "$stash_name"
-}
-
-function gadd() {
-  local out q n addfiles
-  while out=$(
-      git status --short |
-      awk '{if (substr($0,2,1) !~ / /) print $2}' |
-      fzf-tmux --multi --exit-0 --expect=ctrl-d); do
-    q=$(head -1 <<< "$out")
-    n=$[$(wc -l <<< "$out") - 1]
-    addfiles=(`echo $(tail "-$n" <<< "$out")`)
-    [[ -z "$addfiles" ]] && continue
-    if [ "$q" = ctrl-d ]; then
-      git diff --color=always $addfiles | less -R
-    else
-      git add $addfiles
-    fi
-  done
-  }
-

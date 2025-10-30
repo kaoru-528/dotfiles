@@ -33,6 +33,16 @@ link_to_homedir() {
     if [[ -e "$dotdir/git-scripts" ]]; then
       command ln -snf "$dotdir/git-scripts" "$HOME/git-scripts"
     fi
+    # Brewfile のリンクを貼る
+    if [[ -e "$dotdir/Brewfile" ]]; then
+      if [[ -L "$HOME/Brewfile" ]]; then
+        command rm -f "$HOME/Brewfile"
+      fi
+      if [[ -e "$HOME/Brewfile" ]]; then
+        command mv "$HOME/Brewfile" "$HOME/.dotbackup"
+      fi
+      command ln -snf "$dotdir/Brewfile" "$HOME/Brewfile"
+    fi
   else
     command echo "same install src dest"
   fi
@@ -54,5 +64,4 @@ while [ $# -gt 0 ];do
 done
 
 link_to_homedir
-git config --global include.path "~/.gitconfig_shared"
 command echo -e "\e[1;36m Install completed!!!! \e[m"

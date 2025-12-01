@@ -9,6 +9,8 @@
 !/.config/karabiner/assets/
 !/.config/karabiner/assets/complex_modifications/
 !/.config/karabiner/assets/complex_modifications/*.json
+!/.config/starship/
+!/.config/starship/starship.toml
 
 # Ignore user-specific gitconfig
 .gitconfig_user

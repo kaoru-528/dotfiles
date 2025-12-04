@@ -3,7 +3,7 @@
   select-add = _select-add
   select-switch = _select-switch
   uncommit = reset --soft HEAD^
-  lgn = log --graph --decorate --abbrev-commit --format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset)%C(yellow)%d%C(reset)\n  %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+  lgn = log --graph --decorate --abbrev-commit --format=format:'%C(blue)%h%C(reset) - %C(green)(%ar)%C(reset)%C(yellow)%d%C(reset)%n  %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
 
 [pager]
     diff = delta

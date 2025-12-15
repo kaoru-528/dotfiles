@@ -7,7 +7,7 @@
 ### 2. Run the script
 
 ```bash
-scripts/link.sh
+./link.sh
 ```
 
 `~`配下にdotfileのシンボリックリンクを作成します。

@@ -5,6 +5,7 @@ eval "$(rbenv init -)"
 alias ll="ls -all"
 alias gs="git switch"
 alias gp="git pull origin main"
+alias anti='open -a Antigravity'
 
 export STARSHIP_CONFIG=~/dotfiles/.config/starship/starship.toml
 export PATH="$HOME/git-scripts:$PATH"

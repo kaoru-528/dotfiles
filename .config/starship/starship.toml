@@ -1,5 +1,25 @@
+format = """
+$directory\
+$git_branch\
+$git_status\
+\n$character
+"""
+
+right_format = """
+$time
+"""
+
+# コマンドラインに1行分のスペースを入れる
+add_newline = true
+
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style) "
 truncation_length = 4
 truncate_to_repo = false
 truncation_symbol = "…/"
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+# style = "bg:#1d2230"
+format = '[[   $time ](fg:#a0a9cb)]($style)'

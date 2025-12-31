@@ -39,8 +39,10 @@
     zero-style = syntax
     blame-format = "{author:<18} ({commit:>7}) ┊{timestamp:^16}┊ "
     side-by-side = true
+
 [push]
 	default = current
+
 [include]
 	path = ~/.gitconfig_shared
 	path = ~/.gitconfig_user

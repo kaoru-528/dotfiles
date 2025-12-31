@@ -4,6 +4,9 @@
 .config/**
 
 # .config配下の特定のファイルをignoreから除外（追跡する）
+!/.config/wezterm/
+!/.config/wezterm/wezterm.lua
+!/.config/wezterm/keybinds.lua
 !/.config/karabiner/
 !/.config/karabiner/karabiner.json
 !/.config/karabiner/assets/

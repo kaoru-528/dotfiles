@@ -8,6 +8,5 @@ target_br=$(
       perl -pe "s/\s//g; s/\*//g; s/remotes\/origin\///g"
   )
   if [ -n "$target_br" ]; then
-    BUFFER="git switch $target_br"
-    zle accept-line
+    git switch "$target_br"
   fi

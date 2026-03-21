@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# tmuxセッションをfzfで選択してアタッチするスクリプト
+
+session=$(
+    tmux list-sessions -F "#{session_name}: #{session_windows} windows (created #{session_created_string})" 2>/dev/null |
+    fzf --exit-0 --layout=reverse --header="Select tmux session to attach" |
+    cut -d: -f1
+)
+
+if [ -n "$session" ]; then
+    if [ -n "$TMUX" ]; then
+        # 既にtmux内にいる場合はswitch
+        tmux switch-client -t "$session"
+    else
+        # tmux外からの場合はattach
+        tmux attach-session -t "$session"
+    fi
+elif [ -z "$(tmux list-sessions 2>/dev/null)" ]; then
+    echo "No tmux sessions found. Create a new session? [y/N]"
+    read -r answer
+    if [[ "$answer" =~ ^[Yy]$ ]]; then
+        tmux new-session
+    fi
+fi

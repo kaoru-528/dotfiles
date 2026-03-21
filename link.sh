@@ -33,6 +33,9 @@ link_to_homedir() {
     if [[ -e "$dotdir/git-scripts" ]]; then
       command ln -snf "$dotdir/git-scripts" "$HOME/git-scripts"
     fi
+    if [[ -e "$dotdir/tmux-scripts" ]]; then
+      command ln -snf "$dotdir/tmux-scripts" "$HOME/tmux-scripts"
+    fi
     # Brewfile のリンクを貼る
     if [[ -e "$dotdir/Brewfile" ]]; then
       if [[ -L "$HOME/Brewfile" ]]; then

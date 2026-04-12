@@ -16,6 +16,8 @@
 !/.config/starship/starship.toml
 !/.config/sheldon/
 !/.config/sheldon/plugins.toml
+!/.config/zsh
+!/.config/zsh/history.zsh
 
 # Ignore user-specific gitconfig
 .gitconfig_user

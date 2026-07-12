@@ -25,3 +25,6 @@ export PATH="/Users/kaoru_m2mba/.antigravity/antigravity/bin:$PATH"
 
 # History・fzf・cdr設定
 source ~/dotfiles/.config/zsh/history.zsh
+
+# Added by Antigravity IDE
+export PATH="/Users/kaoru_m2mba/.antigravity-ide/antigravity-ide/bin:$PATH"
